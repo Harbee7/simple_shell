@@ -39,3 +39,82 @@
  * which is usaed to access environmental variables */
 extern char **environ;
 
+/**
+ * struct liststrn - singly linked list
+ * @a: number field
+ * @strn: the string
+ * @next_node: points to the next node
+ */
+
+typedef struct liststrn
+{
+	int a;
+	char *strn;
+	struct liststrn *next_node
+} list_t;
+
+/**
+ * structure info - contains some info to pass into a function
+ * @arg: argument
+ * @argc: argument count
+ * @argv: argument vector
+ * @error_count: error count
+ * @path: string path
+ * @error_number: error number for exit
+ * @flag_count: if on, count the line of input
+ * @file_name: program file name
+ * @local_env: the linked list local copy of environ
+ * @modifed_environ: modified copy of environ
+ * @alias: alias node
+ * @environ_changed: on if environment was changed
+ * @history_node: history node
+ * @status: return status
+ * @cmd_buffer: address of pointer to cmd_buffer
+ * @readfd: the fd from which to read line input
+ * @cmd_buffer_type: cmd buffer type
+ * @history_count: history line number count
+ */
+
+typedef structure info
+{
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int error_count;
+	int error_number;
+	int flag_count;
+	char *file_name;
+	list_t *history_node;
+	list_t *local_env;
+	list_t *allias;
+	char **modified_environ;
+	int environ_changed;
+	int status;
+	char **cmd_buffer;
+	int readfd;
+	int cmd_buffer_type;
+	int history_count;
+} inform_t;
+
+#define INFORM_INIT\
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+	0, 0, 0}
+
+/**
+ * structure builtin - contains builtin string
+ * @funct: function
+ * @flag_type: builtin command flag type
+ */
+
+typedef structure builtin
+{
+	char *flag_type;
+	int (*funct)(inform_t*);
+} builtin_tab;
+
+/* 0-betty.c */
+int am_active(inform_t *inform);
+int is_dels(char, char *);
+int _atoi(char *);
+int is_alpha(int);
