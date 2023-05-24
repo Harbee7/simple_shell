@@ -25,8 +25,7 @@ int is_dels(char a, char *dels)
 	while (*dels)
 		if (*dels++ == a)
 			return (1);
-		else
-			return (0);
+	return (0);
 }
 
 /**
@@ -38,22 +37,22 @@ int is_dels(char a, char *dels)
 
 int _atoi(char *b)
 {
-	int j, sign = 1, flag = 0, op;
+	int j, sign = 1, f = 0, op;
 	unsigned int r = 0;
 
-	for (j = 0; b[j] != '\0' && flag != 2; j++)
+	for (j = 0; b[j] != '\0' && f != 2; j++)
 	{
 		if (b[j] == '-')
 			sign *= -1;
 
 		if (b[j] >= '0' && b[j] <= '9')
 		{
-			flag = 1;
+			f = 1;
 			r *= 10;
 			r += (b[j] - '0');
 		}
-		else if (flag == 1)
-			flag = 2;
+		else if (f == 1)
+			f = 2;
 	}
 
 	if (sign == -1)
@@ -66,14 +65,14 @@ int _atoi(char *b)
 
 /**
  * is_alpha - to check for alphabetic char
- * @c: input value
+ * @b: input value
  *
  * Return: 1, if c is alphabetic, 0 if otherwise
  */
 
-int is_alpha(int c)
+int is_alpha(int b)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	if ((b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z'))
 		return (1);
 	else
 		return (0);
