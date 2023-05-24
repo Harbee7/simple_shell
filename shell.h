@@ -53,7 +53,7 @@ typedef struct liststrn
 } list_t;
 
 /**
- * struct inform - contains some info to pass into a function
+ * struct info - contains some info to pass into a function
  * @arg: argument
  * @argc: argument count
  * @argv: argument vector
@@ -74,7 +74,7 @@ typedef struct liststrn
  * @history_count: history line number count
  */
 
-typedef struct inform
+typedef struct info
 {
 	char *arg;
 	char **argv;
@@ -94,7 +94,7 @@ typedef struct inform
 	int readfd;
 	int cmd_buffer_type;
 	int history_count;
-} inform_t;
+} info_t;
 
 
 /**
@@ -106,33 +106,33 @@ typedef struct inform
 typedef struct arguments
 {
 	char *flag_type;
-	int (*funct)(inform_t*);
+	int (*funct)(info_t*);
 } arguments_tab;
 
 /* 0-betty.c */
-int am_active(inform_t *inform);
+int am_active(info_t *info);
 int is_dels(char, char *);
 int is_alpha(char);
 int _atoi(char *);
 
 /* 1-UNIX.c */
-int my_exit(inform_t *);
-int my_help(inform_t *);
-int change_dir(inform_t *);
+int my_exit(info_t *);
+int my_help(info_t *);
+int change_dir(info_t *);
 
 /* 2-arguments.c */
-int cmd_history(inform_t *);
-int my_alias(inform_t *);
-int adjust_alias(inform_t *);
+int cmd_history(info_t *);
+int my_alias(info_t *);
+int adjust_alias(info_t *);
 int inscribe_alias(list_t *ad_node);
-int my_alias(inform_t *);
+int my_alias(info_t *);
 
 /* 3-PATH.c */
-char *get_global(inform_t *, const char *);
-int my_global(inform_t *);
-int set_global(inform_t *);
-int unset_global(inform_t *);
-int populate_global_list(inform_t *);
+char *get_global(info_t *, const char *);
+int my_global(info_t *);
+int set_global(info_t *);
+int unset_global(info_t *);
+int populate_global_list(info_t *);
 
 /* 4-exit.c */
 

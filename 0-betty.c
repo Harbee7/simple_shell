@@ -2,14 +2,14 @@
 
 /**
  * am_active - returns true if sherll is in a active mode
- * @inform: the struct address
+ * @info: the struct address
  *
  * Return: 1, 0
  */
 
-int am_active(inform_t *inform)
+int am_active(info_t *info)
 {
-	return (isatty(STDIN_FILENO) && inform->readfd <= 2);
+	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
 
 /**
@@ -25,7 +25,8 @@ int is_dels(char a, char *dels)
 	while (*dels)
 		if (*dels++ == a)
 			return (1);
-	return (0);
+		else
+			return (0);
 }
 /**
  * is_alpha - to check for alphabetic character
