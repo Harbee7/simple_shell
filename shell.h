@@ -5,6 +5,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <limits.h>
+#include <unistd.h>
+#include <fcnti.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 /* Header files for read and write buffer */
 #define READ_BUFFER_SIZE 1024
@@ -13,7 +19,7 @@
 
 /* Header files used for system getline */
 #define _GETLINE 0
-#define _STRTOK 0
+#define _STRNTOK 0
 
 /* Header files for command chain */
 #define CMD_NORMAL 0
@@ -21,13 +27,17 @@
 #define CMD_OR 2
 #define CMD_CHAIN 3
 
+/* to convert_number */
+#define CONVERT_TO_LOWERCASE 1
+#define CONVERT_TO_UNSIGNED 2
+
 /* Header files used to set the name and size of history file */
 #define HISTORY_FILE 
 #define HISTORY_MAX 4096
 
 /* Header files used to declare the global variable environment
- * which is usaed to access environmental variables */
-extern char **environ;
+ * which is usaed to access global variables */
+extern char **global;
 
 /**
  * struct liststrn - singly linked list
