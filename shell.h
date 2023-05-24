@@ -123,10 +123,10 @@ int _putchar(char c);
 
 /* 2-arguments.c */
 int cmd_history(info_t *);
-int my_alias(info_t *);
-int adjust_alias(info_t *);
-int inscribe_alias(list_t *ad_node);
-int my_alias(info_t *);
+int my_allias(info_t *);
+int adjust_allias(info_t *);
+int inscribe_allias(list_t *ad_node);
+int my_allias(info_t *);
 
 /* 3-PATH.c */
 char *get_global(info_t *, const char *);

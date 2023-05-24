@@ -3,26 +3,26 @@
 /**
  * cmd_history - this displays the history of the command line preceded with
  * line numbers starting from 0
- * @inform: this structure contains potential argument
+ * @info: this structure contains potential argument
  *
  * Return: 0
  */
 
-int cmd_history(inform_t *inform)
+int cmd_history(info_t *info)
 {
-	print_list(inform->history_node);
+	print_list(info->history_node);
 	return (0);
 }
 
 /**
- * my_alias - converts alias to strn
- * @inform: this structure contains potential argument
+ * my_allias - converts alias to strn
+ * @info: this structure contains potential argument
  * @strn: string
  *
  * Return: 0, 1
  */
 
-int my_alias(inform_t *inform, char *strn)
+int my_allias(info_t *info, char *strn)
 {
 	char *b, c;
 	int r;
@@ -32,21 +32,21 @@ int my_alias(inform_t *inform, char *strn)
 		return (1);
 	c = *b;
 	*b = 0;
-	r = remove_node_at_index(&(inform->alias),
-			node_index(inform->alias, node_start(inform->alias, strn, -1)));
+	r = remove_node_at_index(&(info->allias),
+			node_index(info->allias, node_start(info->allias, strn, -1)));
 	*b = c;
 	return (r);
 }
 
 /**
- * adjust_alias - this adjusts the alias to string
- * @inform: this structure contains potential argument
+ * adjust_allias - this adjusts the alias to string
+ * @info: this structure contains potential argument
  * @strn: string
  *
  * Return: 0, 1
  */
 
-int adjust_alias(inform_t *inform, char *strn)
+int adjust_allias(info_t *info, char *strn)
 {
 	char *b;
 
@@ -54,20 +54,20 @@ int adjust_alias(inform_t *inform, char *strn)
 	if (!b)
 		return (1);
 	if (!*++b)
-		return (my_alias(inform, strn));
+		return (my_allias(info, strn));
 
-	my_alias(inform, strn);
-	return (node_ad_end(&(inform->alias), strn, 0) == NULL);
+	my_allias(info, strn);
+	return (node_ad_end(&(info->allias), strn, 0) == NULL);
 }
 
 /**
- * inscribe_alias - this inscribes or print an alias string
+ * inscribe_allias - this inscribes or print an alias string
  * @ad_node: the node of the alias
  *
  * Return; 1, 0
  */
 
-int inscribe_alias(list_t *ad_node)
+int inscribe_allias(list_t *ad_node)
 {
 	char *b = NULL, *i = NULL;
 
@@ -86,35 +86,35 @@ int inscribe_alias(list_t *ad_node)
 }
 
 /**
- * my_alias - imitates the alias arguments
- * @inform: this structure contains potential argument
+ * my_allias - imitates the alias arguments
+ * @info: this structure contains potential argument
  *
  * Return: 0
  */
 
-int my_alias(inform_t *inform)
+int my_allias(info_t *info)
 {
 	int j = 0;
 	char *b = NULL;
 	list_t *ad_node = NULL;
 
-	if (inform->argc == 1)
+	if (info->argc == 1)
 	{
-		ad_node = inform->alias;
+		ad_node = info->allias;
 		while (ad_node)
 		{
-			inscribe_alias(ad_node);
+			inscribe_allias(ad_node);
 			ad_node = ad_node->next;
 		}
 		return (0);
 	}
-	for (j = 1; inform->argv[j]; j++)
+	for (j = 1; info->argv[j]; j++)
 	{
-		b = _strnchr(inform->argv[j], '=');
+		b = _strnchr(info->argv[j], '=');
 		if (b)
-			adjust_alias(inform, inform->argv[j]);
+			adjust_allias(info, info->argv[j]);
 		else
-			inscribe_alias(node_start(inform->alias, inform->argv[j],
+			inscribe_allias(node_start(info->allias, info->argv[j],
 						'='));
 	}
 
