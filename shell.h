@@ -7,7 +7,6 @@
 #include <errno.h>
 #include <limits.h>
 #include <unistd.h>
-#include <fcnti.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -50,11 +49,11 @@ typedef struct liststrn
 {
 	int a;
 	char *strn;
-	struct liststrn *next_node
+	struct liststrn *next_node;
 } list_t;
 
 /**
- * structure inform - contains some info to pass into a function
+ * struct inform - contains some info to pass into a function
  * @arg: argument
  * @argc: argument count
  * @argv: argument vector
@@ -75,7 +74,7 @@ typedef struct liststrn
  * @history_count: history line number count
  */
 
-typedef structure inform
+typedef struct inform
 {
 	char *arg;
 	char **argv;
@@ -99,12 +98,12 @@ typedef structure inform
 
 
 /**
- * structure arguments - contains builtin string
+ * struct arguments - contains builtin string
  * @funct: function
  * @flag_type: builtin command flag type
  */
 
-typedef structure arguments
+typedef struct arguments
 {
 	char *flag_type;
 	int (*funct)(inform_t*);
@@ -113,8 +112,8 @@ typedef structure arguments
 /* 0-betty.c */
 int am_active(inform_t *inform);
 int is_dels(char, char *);
+int is_alpha(char);
 int _atoi(char *);
-int is_alpha(int);
 
 /* 1-UNIX.c */
 int my_exit(inform_t *);
@@ -137,3 +136,4 @@ int populate_global_list(inform_t *);
 
 /* 4-exit.c */
 
+#endif

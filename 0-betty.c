@@ -27,6 +27,20 @@ int is_dels(char a, char *dels)
 			return (1);
 	return (0);
 }
+/**
+ * is_alpha - to check for alphabetic character
+ * @b: character to check for
+ *
+ * Return: 1, if b is alpabetic, 0 if it is otherwise
+ */
+
+int is_alpha(char b)
+{
+	if ((b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z'))
+		return (1);
+	else
+		return (0);
+}
 
 /**
  * _atoi - used to convert a string to an integer
@@ -61,19 +75,4 @@ int _atoi(char *b)
 		op = r;
 
 	return (op);
-}
-
-/**
- * is_alpha - to check for alphabetic char
- * @b: input value
- *
- * Return: 1, if c is alphabetic, 0 if otherwise
- */
-
-int is_alpha(int b)
-{
-	if ((b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z'))
-		return (1);
-	else
-		return (0);
 }
