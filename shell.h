@@ -112,7 +112,7 @@ typedef struct arguments
 /* 0-betty.c */
 int am_active(info_t *info);
 int is_dels(char, char *);
-int is_alpha(char);
+int is_alpha(int);
 int _atoi(char *);
 
 /* 1-UNIX.c */

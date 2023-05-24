@@ -35,7 +35,7 @@ int is_dels(char a, char *dels)
  * Return: 1, if b is alpabetic, 0 if it is otherwise
  */
 
-int is_alpha(char b)
+int is_alpha(int b)
 {
 	if ((b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z'))
 		return (1);
