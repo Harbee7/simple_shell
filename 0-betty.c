@@ -66,14 +66,14 @@ int _atoi(char *b)
 
 /**
  * is_alpha - to check for alphabetic char
- * @b: input value
+ * @c: input value
  *
- * Return: 1, if b is alphabetic, 0 if otherwise
+ * Return: 1, if c is alphabetic, 0 if otherwise
  */
 
-int is_alpha(int b)
+int is_alpha(int c)
 {
-	if ((b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z'))
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
 	else
 		return (0);

@@ -4,22 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
 #include <errno.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <fcnti.h>
-#include <sys/stat.h>
 
 /* Header files for read and write buffer */
 #define READ_BUFFER_SIZE 1024
 #define WRITE_BUFFER_SIZE 1024
 #define BUFFER_FLUSH -1
-
-/* Header files to convert number */
-#define CONVERT_TO_LOWERCASE 1
-#define CONVERT_TO_UNSIGNED 2
 
 /* Header files used for system getline */
 #define _GETLINE 0
@@ -54,7 +44,7 @@ typedef struct liststrn
 } list_t;
 
 /**
- * structure info - contains some info to pass into a function
+ * structure inform - contains some info to pass into a function
  * @arg: argument
  * @argc: argument count
  * @argv: argument vector
@@ -63,10 +53,10 @@ typedef struct liststrn
  * @error_number: error number for exit
  * @flag_count: if on, count the line of input
  * @file_name: program file name
- * @local_env: the linked list local copy of environ
- * @modifed_environ: modified copy of environ
+ * @local_global: the linked list local copy of global var
+ * @modifed_global: modified copy of global var
  * @alias: alias node
- * @environ_changed: on if environment was changed
+ * @global_changed: on if global var was changed
  * @history_node: history node
  * @status: return status
  * @cmd_buffer: address of pointer to cmd_buffer
@@ -75,7 +65,7 @@ typedef struct liststrn
  * @history_count: history line number count
  */
 
-typedef structure info
+typedef structure inform
 {
 	char *arg;
 	char **argv;
@@ -86,10 +76,10 @@ typedef structure info
 	int flag_count;
 	char *file_name;
 	list_t *history_node;
-	list_t *local_env;
+	list_t *local_global;
 	list_t *allias;
-	char **modified_environ;
-	int environ_changed;
+	char **modified_global;
+	int global_changed;
 	int status;
 	char **cmd_buffer;
 	int readfd;
@@ -97,24 +87,43 @@ typedef structure info
 	int history_count;
 } inform_t;
 
-#define INFORM_INIT\
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-	0, 0, 0}
 
 /**
- * structure builtin - contains builtin string
+ * structure arguments - contains builtin string
  * @funct: function
  * @flag_type: builtin command flag type
  */
 
-typedef structure builtin
+typedef structure arguments
 {
 	char *flag_type;
 	int (*funct)(inform_t*);
-} builtin_tab;
+} arguments_tab;
 
 /* 0-betty.c */
 int am_active(inform_t *inform);
 int is_dels(char, char *);
 int _atoi(char *);
 int is_alpha(int);
+
+/* 1-UNIX.c */
+int my_exit(inform_t *);
+int my_help(inform_t *);
+int change_dir(inform_t *);
+
+/* 2-arguments.c */
+int cmd_history(inform_t *);
+int my_alias(inform_t *);
+int adjust_alias(inform_t *);
+int inscribe_alias(list_t *ad_node);
+int my_alias(inform_t *);
+
+/* 3-PATH.c */
+char *get_global(inform_t *, const char *);
+int my_global(inform_t *);
+int set_global(inform_t *);
+int unset_global(inform_t *);
+int populate_global_list(inform_t *);
+
+/* 4-exit.c */
+
