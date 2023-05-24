@@ -119,6 +119,7 @@ int _atoi(char *);
 int my_exit(info_t *);
 int my_help(info_t *);
 int change_dir(info_t *);
+int _putchar(char c);
 
 /* 2-arguments.c */
 int cmd_history(info_t *);

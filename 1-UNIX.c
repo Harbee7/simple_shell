@@ -2,46 +2,46 @@
 
 /**
  * my_exit - it exits the shell
- * @inform: this structure contains potential argument
+ * @info: this structure contains potential argument
  *
  * Return: 0
  */
 
-int my_exit(inform_t *inform)
+int my_exit(info_t *info)
 {
 	int e;
 
-	if (inform->argv[1])
+	if (info->argv[1])
 	{
-		e = erroratoi(inform->argv[1]);
+		e = erroratoi(info->argv[1]);
 		if (e == -1)
 		{
-			inform->status  = 2;
-			print_error(inform, "incorrect number: ");
-			_eputs(inform->argv[1]);
-			_eputchar('\n');
+			info->status  = 2;
+			print_error(info, "incorrect number: ");
+			_puts(info->argv[1]);
+			_putchar('\n');
 			return (1);
 		}
 
-		inform->errror_number = _erroratoi(inform->argv[1]);
+		info->errror_number = _erroratoi(info->argv[1]);
 		return (-2);
 	}
-	inform->error_number = -1;
+	info->error_number = -1;
 	return (-2);
 }
 
 /**
  * my_help - it changes the current dir of the whole process
- * @inform: this structure contains potential argument
+ * @info: this structure contains potential argument
  *
  * Return: 0
  */
 
-int my_help(inform_t *inform)
+int my_help(info_t *info)
 {
 	char **c;
 
-	c = inform->argv;
+	c = info->argv;
 	_puts("please help. This function is not yet implemented \n");
 	if (0)
 		_puts(*c);
@@ -50,12 +50,12 @@ int my_help(inform_t *inform)
 
 /**
  * change_dir - changes the current directory of the whole process
- * @inform: this structure contains potential argument
+ * @info: this structure contains potential argument
  *
  * Return: 0
  */
 
-int change_dir(inform_t *inform)
+int change_dir(info_t *info)
 {
 	char *c, *d, buffer[1024];
 	int ch;
@@ -63,38 +63,38 @@ int change_dir(inform_t *inform)
 	c = getcwd(buffer, 1024);
 	if (!c)
 		_puts("TODO: >>getcwd this is a failure emessage here<<\n");
-	if (!inform->argv[1])
+	if (!info->argv[1])
 	{
-		d = _getenv(inform, "HOMEDIRECTORY=");
+		d = getenv(info, "HOMEDIRECTORY=");
 		if (!d)
-				chdir((dir = _getenv(inform, "PRINTWORKINGDIRECTORY="))
+				chdir((dir = getenv(info, "PRINTWORKINGDIRECTORY="))
 						? dir : "/");
 		else
 			ch = chdir(dir);
 	}
-	else if (_strncmp(inform->argv[1], "-") == 0)
+	else if (_strncmp(info->argv[1], "-") == 0)
 	{
-		if (!_getenv(inform, "OLDPRINTWORKINGDIRECTORY="))
+		if (!getenv(info, "OLDPRINTWORKINGDIRECTORY="))
 		{
 			_puts(c);
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_getenv(inform, "OLDPRINTWORKINGDIRECTORY=")), _putchar('\n');
-			chdir((dir = _getenv(inform, "OLDPRINTWORKINGDIRECTORY=")) ? dir : "/");
+		_puts(getenv(info, "OLDPRINTWORKINGDIRECTORY=")), _putchar('\n');
+			chdir((dir = getenv(info, "OLDPRINTWORKINGDIRECTORY=")) ? dir : "/");
 	}
 	else
-		ch = chdir(inform->argv[1]);
+		ch = chdir(info->argv[1]);
 	if (ch == -1)
 	{
-		print_error(inform, "I can't change directory to ");
-		_eputs(inform->argv[1], -eputchar('\n');
+		print_error(info, "I can't change directory to ");
+		_puts(info->argv[1], _putchar('\n'));
 	}
 	else
 	{
-		_setenv(inform, "OLDPRINTWORKINGDIRECTORY", _getenv(inform,
+		_setenv(info, "OLDPRINTWORKINGDIRECTORY", getenv(info,
 					"PRINTWORKINGDIRECTORY="));
-		_setenv(inform, "PRINTWORKINGDIRECTORY", getcwd(buffer, 1024));
+		_setenv(info, "PRINTWORKINGDIRECTORY", getcwd(buffer, 1024));
 	}
 	return (0);
 }
